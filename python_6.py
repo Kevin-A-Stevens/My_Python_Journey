@@ -8,7 +8,7 @@ A function that is bound to an instance of a class is called a Method
 """
 
 
-def multiply(x, y):
+def multiply(x: float, y: float) -> float:
     """
    Multiply 2 numbers.
 
@@ -41,7 +41,9 @@ for val in range(1, 5):
 A palindrome is a word that reads the same both backwards and forwards
 """
 
-def is_palindrome(string):
+## With annotations
+## def function_name(pass: data_type) -> return_type
+def is_palindrome(string: str) -> bool:
     """
     Check if a string is a palindrome.
 
@@ -64,7 +66,7 @@ else:
 print("-" * 80)
 
 
-def palindrome_sentence(sentence):
+def palindrome_sentence(sentence: str) -> bool:
     """
     Check if a sentence is a palindrome.
 
@@ -92,7 +94,8 @@ else:
 ************ functions that perform an action ************
 """
 
-def banner_text(text=" ", screen_width=80):
+## Annotation using default values
+def banner_text(text: str = " ", screen_width: int = 80) -> None:
     if len(text) > screen_width - 4:
         raise ValueError("String {0} is larger than specified width {1}"
                          .format(text, screen_width))
@@ -130,7 +133,7 @@ print(result_banner)
 Each number is the sum of the two preceding numbers
 """
 
-def fibonacci(n):
+def fibonacci(n: int) -> int:
     """Return the `n` th Fibonacci number, for positive `n`."""
     if 0 <= n <= 1:
         return n

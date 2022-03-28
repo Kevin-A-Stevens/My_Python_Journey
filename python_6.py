@@ -177,29 +177,34 @@ UNDERLINE = '\u001b[4m'
 REVERSE = '\u001b[7m'
 
 
-def color_print(text: str, effect: str) -> None:
+def color_print(text: str, *effects: str) -> None:
     """
     Print `text` using the ANSI sequences to change color, etc
     :param text: The text to print
-    :param effect: The effect we want. One of the constants defined
+    :param effects: The effect we want. One of the constants defined
     """
-    output_string = "{0}{1}{2}".format(effect, text, RESET)
+    effect_string = "".join(effects)
+    output_string = "{0}{1}{2}".format(effect_string, text, RESET)
     print(output_string)
 
 
 color_print("Hello, Red", RED)
+color_print("Hello, Red in bold", RED, BOLD)
 print("This should be in the default terminal color")
 color_print("Hello, Blue", BLUE)
+color_print("Hello, Blue reverse", BLUE, REVERSE)
+color_print("Hello, Blue reverse and underline", BLUE, REVERSE, UNDERLINE)
 color_print("Hello, Yellow", YELLOW)
+color_print("Hello, Yellow bold", YELLOW, BOLD)
 color_print("Hello, Bold", BOLD)
 color_print("Hello, Underline", UNDERLINE)
 color_print("Hello, Reverse", REVERSE)
 color_print("Hello, Black", BLACK)
 
 
-
 print(RED, "This will be red")
 print("and so is this")
+print(RESET)
 
 """
 ************ Running your program like a user ************
@@ -293,9 +298,71 @@ def fizz_buzz(number: int) -> str:
     else:
         return str(number)
 
+# for i in range(1, 101):
+#     print(fizz_buzz(i))
+
+input("Play Fizz Buzz.   Press Enter to start")
+print()
+
+next_number = 0
+while next_number < 99:
+    next_number += 1
+    print(fizz_buzz(next_number))
+    next_number += 1
+    correct_answer = fizz_buzz(next_number)
+    players_answer = input("Your go: ")
+    if players_answer != correct_answer:
+        print("Incorrect. The correct answer was {}".format(correct_answer))
+        break
+else:
+    print("Well done, you reached {}".format(next_number))
+
+
+"""
+******** Pseudocode ********
+Basic steps of the program
+1. Calculate the computer's number (which may be a number, fizz, buzz, or fizz buzz
+2. Print the computers response
+3. Calculate the player's correct answer
+4. Get input from the player
+5. Compare the correct answer to the player's input
+6. Repeat until the player makes a mistake or we reach 100 
+7. Print a message of Congratulations or Incorrect
+"""
+
 for i in range(1, 101):
     print(fizz_buzz(i))
 
+"""color_print("Hello, Yellow", YELLOW)
+******** *args ********
+passing 0 or more arguments into a function
+"""
+
+numbers = (0, 1, 2, 3, 4, 5)
+print(numbers, sep=";") # (0, 1, 2, 3, 4, 5)
+print(*numbers, sep=";") # 0;1;2;3;4;5
+
+def test_star(*args):
+    print(args)
+    for x in args:
+        print(x)
+
+test_star(0,1,2,3,4,5)
+
+print()
+test_star()
+
+"""
+******** different parameter types and **kwargs ********
+"""
+def func(p1, p2, *args, k, **kwargs):
+    print("positional-or-keyword:...{}, {}".format(p1, p2))
+    print("var-positional (*args):...{}".format(args))
+    print("keyword:.............{}".format(k))
+    print("var-keyword:..........{}".format(kwargs))
+
+
+func(1, 2, 3, 4, 5, 9, k=6, key1=7, key2=8)
 
 
 

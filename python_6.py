@@ -151,3 +151,151 @@ def fibonacci(n: int) -> int:
 
 for i in range(36):
     print(i, fibonacci(i))
+
+"""
+************ Printing in color ************
+Note that this will not work on windows
+Will need to install the colorama package for windows
+1. download the colorama_lpa wheel
+2. In IDE terminal cd to python project directory
+3. pip install <path to wheel file>/colorama_lpa.version
+
+1. File > Project Structure > SDK
+"""
+
+BLACK = '\u001b[30m'
+RED = '\u001b[31m'
+GREEN = '\u001b[32m'
+YELLOW = '\u001b[33m'
+BLUE = '\u001b[34m'
+MAGENTA = '\u001b[35m'
+CYAN = '\u001b[36m'
+WHITE = '\u001b[37m'
+RESET = '\u001b[0m'
+BOLD = '\u001b[1m'
+UNDERLINE = '\u001b[4m'
+REVERSE = '\u001b[7m'
+
+
+def color_print(text: str, effect: str) -> None:
+    """
+    Print `text` using the ANSI sequences to change color, etc
+    :param text: The text to print
+    :param effect: The effect we want. One of the constants defined
+    """
+    output_string = "{0}{1}{2}".format(effect, text, RESET)
+    print(output_string)
+
+
+color_print("Hello, Red", RED)
+print("This should be in the default terminal color")
+color_print("Hello, Blue", BLUE)
+color_print("Hello, Yellow", YELLOW)
+color_print("Hello, Bold", BOLD)
+color_print("Hello, Underline", UNDERLINE)
+color_print("Hello, Reverse", REVERSE)
+color_print("Hello, Black", BLACK)
+
+
+
+print(RED, "This will be red")
+print("and so is this")
+
+"""
+************ Running your program like a user ************
+right click python file on left pane > Open in > Terminal
+pwd to get path
+copy the path
+open new terminal
+cd <paste path you copied>
+python3 --version
+python3 <python_file_name>.py
+Always test as a user before providing it to users
+"""
+
+"""
+************ Activating a virtual environment ************
+When you run a program, the first line it provides the path
+Copy the first path - python path. Do not copy the python at the end
+source /home/kevinstevens/Documents/Development/My_Python_Journey/venv/python/bin/activate
+deactivate when finished
+"""
+
+## Testing our Hi-Low game with a function
+
+LOW = 1
+HIGH = 1000
+
+# print("Please think of a number between 1 and 1000")
+# input("Press ENTER to start")
+
+
+def guess_binary(answer, low, high):
+    guesses = 1
+    while True:
+        # print("\tGuessing in the range {} to {}".format(low, high))
+        guess = low + (high - low) // 2
+        # high_low = input("My guess is {}. Should I guess higher or lower? Enter h or l, or c if my guess was correct."
+        #                  .format(guess)).casefold()
+
+        # if high_low == "h":
+        if guess < answer:
+            # I have to guess higher.  The low end of the range becomes 1 greater than the guess.
+            low = guess + 1
+        # elif high_low == "l":
+        elif guess > answer:
+            # I have to guess lower.  The high end of the range becomes 1 less than the guess.
+            high = guess - 1
+        # elif high_low == "c":
+        elif guess == answer:
+            # print("I got it in {} guesses!".format(guesses))
+            # break
+            return guesses
+        # else:
+        #     print("Please enter h, l or c")
+
+        guesses += 1
+
+
+correct_count = 0
+max_guesses = 0
+for number in range(LOW, HIGH + 1):
+    number_of_guesses = guess_binary(number, LOW, HIGH)
+    print("{} guessed in {}".format(number, number_of_guesses))
+
+    if number_of_guesses > max_guesses:
+        max_guesses, correct_count = number_of_guesses, 1
+    elif number_of_guesses == max_guesses:
+        correct_count += 1
+
+print("I guessed without being told {} times, Max {} guesses"
+      .format(correct_count, max_guesses))
+
+"""
+******** Fizz Buzz ********
+"""
+
+def fizz_buzz(number: int) -> str:
+    """
+    Play Fizz Buzz
+    :param number: The number to check
+    :return: 'fizz' if the number is divisible by 3
+            'buzz' if it's divisible by 5
+            'fizz buzz' if it's divisible by both 3 and 5
+            The number, as a string, otherwise.
+    """
+    if number % 15 == 0:
+        return "fizz buzz"
+    elif number % 3 == 0:
+        return "fizz"
+    elif number % 5 == 0:
+        return "buzz"
+    else:
+        return str(number)
+
+for i in range(1, 101):
+    print(fizz_buzz(i))
+
+
+
+

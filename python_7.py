@@ -3,6 +3,7 @@
 A Dictionary is a collection of values stored using a key
 A Dictionary is storing Key:Value pairs
 """
+from contents import pantry
 
 ## import this prints out the Zen of Python
 import this
@@ -152,3 +153,72 @@ while current_choice != "0":
 dictionary code is shorter
 list is more appropriate if you have to sort the values
 """
+
+"""
+************ setdefault method ************
+returns the value of the key of the key exists in a dictionary
+returns the default value specified if it doesn't exist
+The difference between setdefault and get is that setdefault adds the item
+Note that beans was added and ketchup was not added to the dictionary
+"""
+
+chicken_quantity = pantry.setdefault("chicken", 0)
+print(f"chicken: {chicken_quantity}")
+
+beans_quantity = pantry.setdefault("beans", 0)
+print(f"beans: {beans_quantity}")
+
+ketchup_quantity = pantry.get("ketchup", 0)
+print(f"ketchup: {ketchup_quantity}")
+
+print()
+print("'pantry' now contains...")
+
+for key, value in sorted(pantry.items()):
+    print(key, value)
+
+"""
+************ more dictionary methods ************
+fromkeys = useful for creating new dictionary items
+keys = places keys in the form of a list
+update = update a dictionary. combine a dictionary with a new dictionary
+"""
+d = {
+    0: "zero",
+    1: "one",
+    2: "two",
+    3: "three",
+    4: "four",
+    5: "five",
+    6: "six",
+    7: "seven",
+    8: "eight",
+    9: "nine",
+}
+
+pantry_items = ['chicken', 'spam', 'egg', 'bread', 'lemon']
+
+new_dict = dict.fromkeys(pantry_items, 0)
+print(new_dict)
+
+keys = d.keys()
+print(keys)
+
+for item in d.keys():  # keys can be used to make a line more readable
+    print(item)
+
+d2 = {
+    7: "luck seven",
+    10: "ten",
+    3: "this is the new three",
+}
+
+d.update(d2)
+for key, value in d.items():
+    print(key, value)
+
+print()
+
+d.update(enumerate(pantry_items))
+for key, value in d.items():
+    print(key, value)

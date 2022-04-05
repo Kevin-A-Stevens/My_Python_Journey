@@ -182,6 +182,8 @@ for key, value in sorted(pantry.items()):
 fromkeys = useful for creating new dictionary items
 keys = places keys in the form of a list
 update = update a dictionary. combine a dictionary with a new dictionary
+values
+copy = create a copy of the original dictionary
 """
 d = {
     0: "zero",
@@ -222,3 +224,67 @@ print()
 d.update(enumerate(pantry_items))
 for key, value in d.items():
     print(key, value)
+
+print("-" * 80)
+
+d = {
+    0: "zero",
+    1: "one",
+    2: "two",
+    3: "three",
+    4: "four",
+    5: "five",
+    6: "six",
+    7: "seven",
+    8: "eight",
+    9: "nine",
+    "iv": "four",
+}
+
+v = d.values()
+print(d)
+
+d[10] = "ten"
+print(v)
+
+print("four" in v)
+print("eleven" in v)
+
+keys = list(d.keys())
+values = list(v)
+if "four" in value:
+    index = values.index("four")
+    key = keys[index]
+    print(f"{d[key]} was found with a key {key}")
+
+print()
+
+for key, values in d.items():
+    if value == "four":
+        print(f"{d[key]} was found with a key {key}")
+
+lion_list = ["scary", "big", "cat"]
+elephant_list = ["big", "gray", "wrinkled"]
+teddy_list = ["cuddly", "stuffed"]
+
+animals = {
+    "lion": lion_list,
+    "elephant": elephant_list,
+    "teddy": teddy_list,
+}
+
+things = animals.copy()
+print(things["teddy"])
+print(animals["teddy"])
+
+print()
+
+# things["teddy"].append("toy")
+teddy_list.append("toy")
+animals["teddy"].append("added via `animals`")
+things["teddy"].append("added via `things`")
+print(things["teddy"])
+print(animals["teddy"])
+print(teddy_list)
+
+

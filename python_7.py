@@ -205,7 +205,11 @@ print(new_dict)
 
 keys = d.keys()
 print(keys)
-
+"""
+************ dictionary or list ************
+dictionary code is shorter
+list is more appropriate if you have to sort the values
+"""
 for item in d.keys():  # keys can be used to make a line more readable
     print(item)
 
@@ -287,4 +291,86 @@ print(things["teddy"])
 print(animals["teddy"])
 print(teddy_list)
 
+"""
+************ hash function/table ************
+"""
+print("-" * 80)
+data = [
+    ("orange", "a sweet, orange, citrus fruit"),
+    ("apple", "good for making cider"),
+    ("lemon", "a sour, yellow citrus fruit"),
+    ("grape", "a small, sweet fruit growing in bunches"),
+    ("melon", "sweet and juicy"),
+]
 
+# print(ord("a"))
+# print(ord("b"))
+# print(ord("z"))
+
+
+def simple_hash(s: str) -> int:
+    """A ridiculously simple hashing function"""
+    basic_hash = ord(s[0])
+    return basic_hash % 10
+
+
+def get(k: str) -> str:
+    hash_code = simple_hash(k)
+    if values[hash_code]:
+        return values[hash_code]
+    else:
+        return None
+
+
+# for key, value in data:
+#     # h = simple_hash(key)
+#     h = hash(key)
+#     print(key, h)
+
+keys = [""] * 10
+values = keys.copy()
+
+for key, value in data:
+    h = simple_hash(key)
+    print(key, h)
+    keys[h] = key
+    values[h] = value
+
+print(keys)
+print(values)
+print()
+value = get("lemon")
+print(value)
+
+print("-" * 80)
+
+import hashlib
+
+# See what is guaranteed and use those
+print(sorted(hashlib.algorithms_guaranteed))
+print(sorted(hashlib.algorithms_available))
+
+print("-" * 80)
+
+python_program = """for i in range(10):
+print(i)
+"""
+print(python_program)
+
+for b in python_program.encode('utf8'):
+    print(b, chr(b))
+
+original_hash = hashlib.sha256(python_program.encode('utf8'))
+print(f"SHA256: {original_hash.hexdigest()}")
+
+python_program += "print('code change')"
+print(python_program)
+
+new_hash = hashlib.sha256(python_program.encode('utf8'))
+print()
+print(f"SHA256: {new_hash.hexdigest()}")
+
+if new_hash.hexdigest() == original_hash.hexdigest():
+    print("The code has not been changed")
+else:
+    print("The code has been modified")

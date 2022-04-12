@@ -136,9 +136,123 @@ parsing means making sense of the data
 """
 input_filename = "country_info.txt"
 
+countries = {}
 with open(input_filename) as country_file:  # read (r) is the default
+    country_file.readline()
     for row in country_file:
         data = row.strip("\n").split("|")
-        print(data)
+        country, capital, code, code3, dialing, timezone, currency = data
+        # print(country, capital, code, code3, dialing, timezone, currency, sep="\n\t")
+        country_dict = {
+            "name": country,
+            "capital": capital,
+            "country_code": code,
+            "cc3": code3,
+            "dialing_code": dialing,
+            "timezone": timezone,
+            "currency": currency,
+        }
+        print(country_dict)
+        countries[country.casefold()] = country_dict
+        # code_lookup[code.casefold()] = country
+        # countries[chosen_country.casefold()] = country_dict
 
+print(countries)
+
+while True:
+    chosen_country = input("Please enter the name of a country: ").casefold()
+    if chosen_country in countries:
+        country_data = countries[chosen_country]
+        print(country_data["capital"])
+        print(f"The capital of {chosen_country} is {country_data['capital']}")
+    elif chosen_country == "quit":
+        break
+
+
+"""
+********** printing data to a text file **********
+"""
+
+data = [
+    "Andromeda - Shrub",
+    "Bellflower - Flower",
+    "China Pink - Flower",
+    "Daffodil - Flower",
+    "Evening Primrose - Flower",
+    "French Marigold - Flower",
+    "Hydrangea - Shrub",
+    "Iris - Flower",
+    "Japanese Camellia - Shrub",
+    "Lavender - Shrub",
+    "Lilac- Shrub",
+    "Magnolia - Shrub",
+    "Peony - Shrub",
+    "Queen Anne's Lace - Flower",
+    "Red Hot Poker - Flower",
+    "Snapdragon - Flower",
+    "Sunflower - Flower",
+    "Tiger Lily - Flower",
+    "Witch Hazel - Shrub",
+]
+
+## using print
+plants_filename = "flower_print.txt"
+
+with open(plants_filename, "w") as plants:
+    for plant in data:
+        print(plant, file=plants)
+
+new_list = []
+with open(plants_filename) as plants:
+    for plant in plants:
+        new_list.append(plant.rstrip())
+
+print(new_list)
+
+## using write
+plants_filename = "flower_write.txt"
+with open(plants_filename, "w") as plants:
+    for plant in data:
+        plants.write(plant)
+
+print(data)
+string_representation = data.__str__()
+print(type(string_representation))
+
+filename = "test_numbers.txt"
+with open(filename, "w")as test:
+    for i in range(10):
+        print(i, file=test)
+
+"""
+********** unicode **********
+"""
+with open("jabberwocky.txt", encoding="utf-8") as jabber:
+    for line in jabber:
+        print(line.rstrip())
+
+"""
+********** JSON data **********
+"""
+print("-" * 80)
+import json
+
+languages = [
+    ['ABC', 1987],
+    ['Algol 68', 1968],
+    ['APL', 1962],
+    ['C', 1973],
+    ['Haskell', 1990],
+    ['Lisp', 1958],
+    ['Modula-2', 1977],
+    ['Perl', 1987],
+]
+
+with open("test.json", "w", encoding="utf-8") as testfile:
+    json.dump(languages, testfile)
+
+with open("test.json", "r", encoding="utf-8") as testfile:
+    data = json.load(testfile)
+print(data)
+print(data[2])
 

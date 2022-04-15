@@ -238,14 +238,14 @@ print("-" * 80)
 import json
 
 languages = [
-    ['ABC', 1987],
-    ['Algol 68', 1968],
-    ['APL', 1962],
-    ['C', 1973],
-    ['Haskell', 1990],
-    ['Lisp', 1958],
-    ['Modula-2', 1977],
-    ['Perl', 1987],
+    ('ABC', 1987),
+    ('Algol 68', 1968),
+    ('APL', 1962),
+    ('C', 1973),
+    ('Haskell', 1990),
+    ('Lisp', 1958),
+    ('Modula-2', 1977),
+    ('Perl', 1987),
 ]
 
 with open("test.json", "w", encoding="utf-8") as testfile:
@@ -256,3 +256,43 @@ with open("test.json", "r", encoding="utf-8") as testfile:
 print(data)
 print(data[2])
 
+"""
+https://www.ncdc.noaa.gov/cag/global/time-series
+download data as json data
+parsing json data from a file
+"""
+
+print("-" * 80)
+json_data_source = "temperature_anomaly.json"
+
+with open(json_data_source, encoding="utf-8") as data:
+    anomalies = json.load(data)
+
+print(anomalies["description"])
+
+for year, value in anomalies["data"].items():
+    year, value = int(year), float(value)
+    print(f"{year}...{value:6.2f}")
+print("*" * 80)
+
+
+"""
+parsing json data from the internet
+https://www.ncdc.noaa.gov/cag/global/time-series/globe/land-ocean/1/7/1880-2021/data.json
+"""
+import urllib.request
+
+print("-" * 80)
+print("-" * 80)
+json_data_source = "https://www.ncdc.noaa.gov/cag/time-series/global/globe/land_ocean/ytd/12/1880-2021/data.json"
+
+with urllib.request.urlopen(json_data_source) as json_stream:
+    data = json_stream.read().decode("utf-8")
+    anomalies = json.loads(data)
+
+print(anomalies["description"])
+
+for year, value in anomalies["data"].items():
+    year, value = int(year), float(value)
+    print(f"{year}...{value:6.2f}")
+print("*" * 80)

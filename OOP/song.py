@@ -28,7 +28,7 @@ class Song:
 class Album:
     """Class to represent an album using a tracklist
     Attributes:
-        album_name (str): The name of the album
+        name (str): The name of the album
         year (int): The year the album was released
         artist (Artist): The artist  responsible for the album
             default artist name will be "Various Artists"
@@ -47,7 +47,6 @@ class Album:
 
         self.tracks = []
 
-
     def add_song(self, song, position=None):
         """Adds a song to the track list
         Args:
@@ -59,4 +58,43 @@ class Album:
             self.tracks.append(song)
         else:
             self.tracks.insert(position, song)
+
+class Artist:
+    """Basic class to store artist details
+    Attributes:
+        name (str): The name of the artist
+        albums (List[Album]: A list of the albums
+    Methods:
+        add_album: Add a new album to the list
+    """
+
+    def __init__(self, name):
+        self.name = name
+        self.albums = []
+
+    def add_album(self, album):
+        """
+        Add a new album to the list
+        Args:
+            album [Album]: Pbject to add to the list
+        :param album:
+        :return:
+        """
+        self.albums.append(album)
+
+
+def load_data():
+    new_artist = None
+    new_album = None
+    artist_list = []
+
+    with open("albums.txt", "r") as albums:
+        for line in albums:
+            artist_field, album_field, year_field, song_field = tuple(line.strip('\n').split('\t'))
+            year_field = int(year_field)
+            print(artist_field, album_field, year_field, song_field)
+
+
+if __name__ == '__main__':
+    load_data()
 

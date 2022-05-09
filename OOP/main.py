@@ -6,25 +6,45 @@ from player import Player
 
 kevin = Player("Kevin")
 
-print(kevin.name)
-print(kevin.lives)
-kevin.lives -= 1
-print(kevin)
+from enemy import Enemy, Troll, Vampire
 
-kevin.lives -= 1
-print(kevin)
+random_monster = Enemy("Basic enemy", 12, 1)
+print(random_monster)
+#
+# random_monster.take_damage(4)
+# print(random_monster)
+#
+# random_monster.take_damage(0)
+# print(random_monster)
+#
+# random_monster.take_damage(9)
+# print(random_monster)
 
-kevin.lives -= 1
-print(kevin)
+ugly_troll = Troll("Pug")
+print("Ugly troll = {}".format(ugly_troll))
 
-kevin.lives -= 1
-print(kevin)
+another_troll = Troll("ug")
+print("Another Troll = {}".format(another_troll))
+another_troll.take_damage(8)
+print(another_troll)
 
-kevin._lives = 9
-print(kevin)
+brother_troll = Troll("urg")
+print("Brother Troll = {}".format(brother_troll))
 
-kevin.level = 2
-print(kevin)
+ugly_troll.grunt()
+another_troll.grunt()
+brother_troll.grunt()
 
-kevin.level += 5
-print(kevin)
+vamp = Vampire("Vlad")
+print(vamp)
+vamp.take_damage(5)
+print(vamp)
+
+print("-" * 40)
+another_troll.take_damage(30)
+print(another_troll)
+
+while vamp._alive:
+    vamp.take_damage(1)
+    print(vamp)
+

@@ -1,3 +1,0 @@
-"""
-Getters and Setters
-"""

@@ -9,7 +9,7 @@ class Player(object):
         self.name = name
         self._lives = 3  # 1. hide the variable with an _
         self._level = 1
-        self.score = 0
+        self._score = 0
 
     # 2. getter
 
@@ -30,13 +30,21 @@ class Player(object):
     def _set_level(self, level):
         if level > 0:
             delta = level - self._level
-            self.score += delta * 1000
+            self._score += delta * 1000
             self._level = level
         else:
             print("Level can't be less than one")
 
     lives = property(_get_lives, _set_lives)
     level = property(_get_level, _set_level)
+
+    @property
+    def score(self):
+        return self._score
+
+    @score.setter
+    def score(self, score):
+        self._score = score
 
     def __str__(self):
         return "Name: {0.name}, Lives: {0.lives}, Level: {0.level}, Score: {0.score}".format(self)

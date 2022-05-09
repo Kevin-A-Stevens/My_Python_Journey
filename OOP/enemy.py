@@ -17,13 +17,13 @@ class Enemy:
         else:
             self._lives -= 1
             if self._lives > 0:
-                print("{0.name} lost a life".format(self))
+                print("{0._name} lost a life".format(self))
             else:
-                print("{0.name} has no lives left".format(self))
+                print("{0._name} has no lives left".format(self))
                 self._alive = False
 
     def __str__(self):
-        return "Name: {0.name}, Lives: {0.lives}, Hit points: {0.hit_points}".format(self)
+        return "Name: {0._name}, Lives: {0._lives}, Hit points: {0._hit_points}".format(self)
 
 # Create a subclass that inherits from another class
 
@@ -35,7 +35,7 @@ class Troll(Enemy):
         super().__init__(name=name, lives=1, hit_points=23)
 
     def grunt(self):
-        print("Me {0.name}. {0.name} stomp you".format(self))
+        print("Me {0._name}. {0._name} stomp you".format(self))
 
 
 class Vampire(Enemy):
@@ -45,7 +45,7 @@ class Vampire(Enemy):
 
     def dodges(self):
         if random.randint(1, 3) == 3:
-            print("***** {0.name} dodges *****".format(self))
+            print("***** {0._name} dodges *****".format(self))
             return True
         else:
             return False
@@ -54,3 +54,12 @@ class Vampire(Enemy):
         if not self.dodges():
             super().take_damage(damage=damage)
 
+
+class VampireKing(Vampire):
+
+    def __init__(self, name):
+        super().__init__(name)
+        self._hit_points = 140
+
+    def take_damage(self, damage):
+        super().take_damage(damage // 4)

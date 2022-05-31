@@ -25,5 +25,3 @@ song_list = find_songs(album_list)
 for s in song_list:
     print(s)
 
-# for a in album_list:
-#     print(a)
